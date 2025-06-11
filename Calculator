@@ -1,0 +1,77 @@
+import tkinter as tk
+
+def clear():
+    global express
+    global output_label1
+    result = "0"
+    express= ""
+    output_label1.set(result)
+
+def press(number):
+    global express
+    global output_label1
+    express = express + number
+    output_label1.set(express)
+
+def equal():
+    try:
+        global express
+        global output_label1
+        result = str(eval(express))
+        output_label1.set(result)
+    except:
+        result= "error"
+        express= ""
+        output_label1
+    output_label1.set(result)
+
+def plus_minus():
+    global express
+    global output_label1
+    try:
+        if express:
+            if express.startswith('-'):
+                express = express[1:]
+            elif express.startswith('+'):
+                express = '-' + express[1:]
+            else:
+                express = '-' + express
+            output_label1.set(express)
+    except:
+        output_label1.set("error")
+        express = ""
+
+window = tk.Tk()
+window.title('Calculator')
+window.option_add('*font','consalas, 18')
+
+output_label1 = tk.StringVar()
+output_label1.set(0)
+express = ''
+
+num_label = tk.Label(master = window, background= "#43df72", width=23, height=5, textvariable= output_label1).grid(row=0, columnspan=4)
+
+bc_btn = tk.Button(master = window , text = 'C', width= 5, command= clear, background= "#D02090" ).grid(row= 1, column=0)
+bl_btn =  tk.Button(master = window, text = '+/-', width= 5 , command= plus_minus,background= "#D02090" ).grid(row = 1, column= 1)
+p_btn = tk.Button(master = window ,text = '%', width = 5,command=lambda : press('%'),background= "#D02090" ).grid(row= 1 ,column = 2)
+h_btn = tk.Button(master = window, text = '/', width = 5,command=lambda : press('/'), background= "#D02090" ).grid(row = 1, column= 3)
+
+b7_btn = tk.Button(master = window , text = '7',width = 5, command=lambda:press('7'),background= "#FA8072").grid(row = 2 ,column = 0)
+b8_btn = tk.Button(master = window , text = '8',width = 5 ,command=lambda : press('8'),background= "#FA8072").grid(row = 2, column= 1)
+b9_btn = tk.Button(master = window , text = '9',width = 5,command=lambda : press('9'),background= "#FA8072").grid(row = 2,column= 2)
+bx_btn = tk.Button(master = window, text = '*',width = 5,command=lambda : press('*'),background= "#D02090" ).grid(row = 2,column= 3)
+
+b4_btn = tk.Button(master = window, text = '4',width = 5,command=lambda : press('4'),background= "#FA8072").grid(row = 3,column = 0)
+b5_btn = tk.Button(master= window , text = '5', width = 5,command=lambda : press('5'),background= "#FA8072").grid(row = 3,column = 1)
+b6_btn = tk.Button(master = window , text = '6',width = 5,command=lambda : press('6'),background= "#FA8072").grid(row = 3, column= 2)
+bd_btn = tk.Button(master = window , text = '-',width= 5,command=lambda : press('-'),background= "#D02090" ).grid(row = 3 , column= 3)
+
+b1_btn = tk.Button(master = window , text = '1' ,width = 5,command=lambda : press('1'),background= "#FA8072").grid(row = 4, column= 0)
+b2_btn = tk.Button(master = window , text = '2',width= 5,command=lambda : press('2'),background= "#FA8072").grid(row = 4, column= 1)
+b3_btn = tk.Button(master = window, text = '3', width = 5,command=lambda : press('3'),background= "#FA8072").grid(row = 4, column= 2)
+ba_btn = tk.Button(master = window , text = '+' , width = 5,command=lambda : press('+'),background= "#D02090" ).grid(row = 4, column = 3)
+
+b0_btn = tk.Button(master = window, text = '0', width = 5,command=lambda : press('0'),background= "#FA8072").grid(row = 5, column= 0)
+b01_btn = tk.Button(master = window, text = '', width = 5,background= "#FA8072").grid(row = 5, column= 1)
+bj_btn = tk.Button(master = window, text = '.', width = 5,command=lambda : press('.'),background= "#FA8072").grid(row = 5, column = 2)
+bequal_btn = tk.Button(master = window, text = '=', width = 5, command = equal ,background= "#D02090" ).grid(row = 5,column = 3)
